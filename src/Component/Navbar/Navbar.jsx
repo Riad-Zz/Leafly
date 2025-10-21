@@ -19,8 +19,8 @@ const Navbar = ({ user }) => {
     );
 
     return (
-        <div className="w-full  bg-white shadow-sm">
-            <div className="lg:max-w-10/12 mx-auto px-1 md:px-4 flex justify-between items-center h-20">
+        <div className="w-full   shadow-sm">
+            <div className="lg:max-w-10/12 mx-auto px-1  flex justify-between items-center h-20">
                 
                 <div className="flex items-center relative">
                     {/*------------- Three bar for small screens----------------------- */}
@@ -52,7 +52,7 @@ const Navbar = ({ user }) => {
                     </div>
 
                     
-                    <img src={logo} alt="Logo" className="md:w-28 md:h-28 w-20 h-20 relative -left-3 top-1 lg:left-5 md:top-2" />
+                    <img src={logo} alt="Logo" className="md:w-28 md:h-28 w-20 h-20 relative -left-3 top-1 lg:left-5 md:top-2 z-10" />
                     <span className="hidden lg:block text-3xl  font-bold text-[#179800]">
                         Leafly
                     </span>

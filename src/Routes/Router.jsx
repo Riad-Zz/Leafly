@@ -10,7 +10,7 @@ export const router = createBrowserRouter([
         Component : Root,
         children : [
             {index : true ,  Component : Home , loader : ()=>fetch('/topPlants.json')},
-            {path:'/plants' , Component : Plants , loader : ()=>fetch('/topPlants.json')}
+            {path:'/plants' , Component : Plants , loader : ()=>fetch('/allPlants.json')}
         ]
     }
 ])

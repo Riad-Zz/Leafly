@@ -9,7 +9,7 @@ const PlantCard = ({ plant }) => {
                 <img
                     src={plant.image}
                     alt={plant.plantName}
-                    className='bg-[#F3F3F3] rounded-2xl px-14 w-full md:h-[300px] 2xl:px-32 py-8 xl:object-cover'
+                    className='bg-[#F3F3F3] rounded-2xl px-14 w-full md:h-[300px] 2xl:px-30 py-8 xl:object-cover'
                 />
 
                 

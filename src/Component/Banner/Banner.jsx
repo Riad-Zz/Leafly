@@ -15,10 +15,10 @@ const Banner = () => {
     //----------------------Data For Our SlideShow-------------------------------------------
     const slides = [
     {
-        title: "Green Paradise",
+        title: "Nature Inside",
         description:
-            "Transform your home into a lush indoor oasis with our premium indoor plants. From air-purifying ferns to vibrant flowering plants, each selection is hand-picked to enhance your space. Enjoy cleaner air, a boost in mood, and the calming presence of nature in every corner.",
-        img: photo,
+            "Bring nature indoors with our modern and stylish plant arrangements. From elegant planters to statement greenery pieces, our designs blend seamlessly with any decor. Create a personal sanctuary that inspires creativity, relaxation, and connection to the natural world.",
+        img: photo3,
     },
     {
         title: "Plant Your Space",
@@ -27,11 +27,12 @@ const Banner = () => {
         img: photo2,
     },
     {
-        title: "Nature Inside",
+        title: "Green Paradise",
         description:
-            "Bring nature indoors with our modern and stylish plant arrangements. From elegant planters to statement greenery pieces, our designs blend seamlessly with any decor. Create a personal sanctuary that inspires creativity, relaxation, and connection to the natural world.",
-        img: photo3,
+            "Transform your home into a lush indoor oasis with our premium indoor plants. From air-purifying ferns to vibrant flowering plants, each selection is hand-picked to enhance your space. Enjoy cleaner air, a boost in mood, and the calming presence of nature in every corner.",
+        img: photo,
     },
+    
 ];
 
 

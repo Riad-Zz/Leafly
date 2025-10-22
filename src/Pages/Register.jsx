@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 const Register = () => {
     const [eye, setEye] = useState(false);
+    // const [error , setError] = useState("") ;
     const { user, setUser, googleLogin, emailRegister, updateUserProfile } = use(AuthContext);
     const location = useLocation();
     const naviagate = useNavigate();
@@ -43,21 +44,37 @@ const Register = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         console.log(name, photo, email, password);
+
         // console.log(e.target)
+
+        if (!/[A-Z]/.test(password)) {
+            toast.warning("Password must contain at least one uppercase letter (A–Z).");
+            return;
+        }
+
+        if (!/[a-z]/.test(password)) {
+            toast.warning("Password must contain at least one lowercase letter (a–z).");
+            return;
+        }
+
+        if (password.length < 6) {
+            toast.warning("Password must be at least 6 characters long.");
+            return;
+        }
+
         emailRegister(email, password).then((result) => {
             const personn = result.user;
-            
-            naviagate(location.state || '/');
 
+            naviagate(location.state || '/');
             //------------- Updating User Name and Photo----------------------- 
 
-            updateUserProfile({displayName : name , photoURL : photo}).then(() => {
-                setUser({...personn,displayName : name , photoURL : photo});
+            updateUserProfile({ displayName: name, photoURL: photo }).then(() => {
+                setUser({ ...personn, displayName: name, photoURL: photo });
             })
                 .catch((error) => {
-                    
-                    toast.warning(error) ;
-                    setUser(personn) ;
+
+                    toast.warning(error);
+                    setUser(personn);
                 });
         })
             .catch((error) => {
@@ -84,6 +101,7 @@ const Register = () => {
                         className="input mb-3 w-full bg-[#F3F3F3] py-4 px-4 rounded-lg"
                         placeholder="Enter Your Name"
                         name='names'
+                        required
                     />
 
                     <label className="label font-bold text-[#403F3F] text-[16px] mb-2">Photo URL</label>
@@ -92,6 +110,7 @@ const Register = () => {
                         className="input mb-3 w-full bg-[#F3F3F3] py-4 px-4 rounded-lg"
                         placeholder="Photo link"
                         name='photo'
+                        required
                     />
 
                     <label className="label font-bold text-[#403F3F] text-[16px] mb-2">Email</label>
@@ -100,6 +119,7 @@ const Register = () => {
                         className="input mb-3 w-full bg-[#F3F3F3] py-4 px-4 rounded-lg"
                         placeholder="Email"
                         name='email'
+                        required
                     />
 
                     <label className="label font-bold text-[#403F3F] text-[16px] mb-2 mt-4">Password</label>
@@ -109,6 +129,7 @@ const Register = () => {
                             className="input mb-3 w-full bg-[#F3F3F3] pr-10 py-4 px-4 rounded-lg"
                             placeholder="Password"
                             name='password'
+                            required
                         />
                         {
                             eye ? <FaEyeSlash onClick={handleEyeClick} className='z-10 absolute right-4 bottom-5 text-xl text-gray-800'></FaEyeSlash> : <FaEye onClick={handleEyeClick} className='z-10 absolute right-4 bottom-5 text-xl text-gray-800'></FaEye>

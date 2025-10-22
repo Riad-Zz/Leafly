@@ -19,6 +19,7 @@ const Register = () => {
         e.preventDefault();
         setEye(!eye);
     }
+
     //-----------Google Login Handle---------------------
     const handlegogleLogin = (e) => {
         e.preventDefault();
@@ -45,15 +46,15 @@ const Register = () => {
         const password = e.target.password.value;
         console.log(name, photo, email, password);
 
-        // console.log(e.target)
 
+        //--------------Password Validation-----------------------
         if (!/[A-Z]/.test(password)) {
-            toast.warning("Password must contain at least one uppercase letter (A–Z).");
+            toast.warning("Password must contain at least one uppercase letter (A-Z).");
             return;
         }
 
         if (!/[a-z]/.test(password)) {
-            toast.warning("Password must contain at least one lowercase letter (a–z).");
+            toast.warning("Password must contain at least one lowercase letter (a-z).");
             return;
         }
 
@@ -64,8 +65,8 @@ const Register = () => {
 
         emailRegister(email, password).then((result) => {
             const personn = result.user;
-
             naviagate(location.state || '/');
+
             //------------- Updating User Name and Photo----------------------- 
 
             updateUserProfile({ displayName: name, photoURL: photo }).then(() => {

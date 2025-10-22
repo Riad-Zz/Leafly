@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../../FireBase/Firebase.config';
-import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, updateProfile } from "firebase/auth";
-import logo from '../../assets/Logo.png'
+import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 
 
 export const AuthContext = createContext() ;
@@ -27,6 +26,10 @@ const AuthProvider = ({children}) => {
     //----------------Update User Profile-------------------
     const updateUserProfile = (updatedUser) => {
         return updateProfile(auth.currentUser ,updatedUser)
+    }
+    //---------------LogIn with Email and password--------------
+    const loginWithEmail = (email,password) =>{
+        return signInWithEmailAndPassword(auth,email,password) ;
     }
 
     //------------Observer-------------------------------
@@ -54,7 +57,8 @@ const AuthProvider = ({children}) => {
         loading,
         logOut,
         emailRegister,
-        updateUserProfile 
+        updateUserProfile ,
+        loginWithEmail 
     } 
     return (
         <div>

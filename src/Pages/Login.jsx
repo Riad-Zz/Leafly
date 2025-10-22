@@ -1,61 +1,88 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
+import React, { use, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router';
 import loginModel from '../assets/loginModel.png';
 import { FaEyeSlash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { IoLogoGoogle } from "react-icons/io";
+import { AuthContext } from '../Provider/AuthProvider/AuthProvider';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
-    
 
-    const [eye,setEye] = useState(false) ;
-
+    const location = useLocation() ;
+    const navigate = useNavigate() ;
+    const [eye, setEye] = useState(false);
+    const { user, setUser, loginWithEmail} = use(AuthContext);
     // ------------------- Onclick EyeControl ----------------
     const handleEyeClick = (e) => {
-        e.preventDefault() ;
-        setEye(!eye) ;
+        e.preventDefault();
+        setEye(!eye);
+    }
+
+    //---------------Handle Email and password Login----------------- 
+    const handleEmailLogin = (e) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        // console.log(email,password) ;
+        loginWithEmail(email, password).then((result) => {
+            const person = result.user;
+            setUser(person);
+            navigate(location.state || '/') ;
+        })
+            .catch((error) => {
+                const errorMessage = error.message;
+                // toast.error(errorMessage) ;
+            });
     }
 
     return (
         <div className='min-h-screen bg-gray-100 flex flex-col md:flex-row items-center justify-center px-2 md:px-5 py-10 '>
-            
+
             {/* Image Section */}
             <div className='hidden md:flex md:w-1/2 justify-center items-center'>
-                <img 
-                    src={loginModel} 
-                    alt="Login Illustration" 
+                <img
+                    src={loginModel}
+                    alt="Login Illustration"
                     className='max-w-xl w-full object-contain'
                 />
-                
+
             </div>
 
             {/* Form Section */}
             <div className='w-full md:w-1/2 flex justify-center items-center'>
-                <form className='bg-white lg:py-24 rounded-xl shadow-md  border border-gray-200 w-full max-w-md lg:max-w-2xl p-8 md:p-12'>
-                    
+                <form onSubmit={handleEmailLogin} className='bg-white lg:py-24 rounded-xl shadow-md  border border-gray-200 w-full max-w-md lg:max-w-2xl p-8 md:p-12'>
+
                     <p className='text-black playfair-display-font text-3xl md:text-4xl text-center font-semibold mb-8'>
                         Login to your account
                     </p>
 
                     <label className="label font-bold text-[#403F3F] text-[16px] mb-2">Email</label>
-                    <input 
-                        type="email" 
-                        className="input mb-3 w-full bg-[#F3F3F3] py-4 px-4 rounded-lg" 
-                        placeholder="Email" 
-                        name='email' 
+                    <input
+                        type="email"
+                        className="input mb-3 w-full bg-[#F3F3F3] py-4 px-4 rounded-lg"
+                        placeholder="Email"
+                        name='email'
                     />
 
                     <label className="label font-bold text-[#403F3F] text-[16px] mb-2 mt-4">Password</label>
                     <div className='relative'>
-                        <input 
-                        type={`${eye ? "text" : "password"}`}
-                        className="input mb-3 w-full bg-[#F3F3F3] pr-10 py-4 px-4 rounded-lg" 
-                        placeholder="Password" 
-                        name='password' 
-                    />
-                    {
-                        eye ? <FaEyeSlash onClick={handleEyeClick} className='z-10 absolute right-4 bottom-5 text-xl text-gray-800'></FaEyeSlash> :<FaEye onClick={handleEyeClick} className='z-10 absolute right-4 bottom-5 text-xl text-gray-800'></FaEye>
-                    }
+                        <input
+                            type={`${eye ? "text" : "password"}`}
+                            className="input mb-3 w-full bg-[#F3F3F3] pr-10 py-4 px-4 rounded-lg"
+                            placeholder="Password"
+                            name='password'
+                        />
+                        {
+                            eye ? <FaEyeSlash onClick={handleEyeClick} className='z-10 absolute right-4 bottom-5 text-xl text-gray-800'></FaEyeSlash> : <FaEye onClick={handleEyeClick} className='z-10 absolute right-4 bottom-5 text-xl text-gray-800'></FaEye>
+                        }
+                    </div>
+                    <div className='mt-3 flex flex-col md:flex-row gap-3 justify-between'>
+                        <div className='flex items-center gap-2'>
+                            <input type="checkbox" className="checkbox " />
+                            <p className='font-bold'>Remember me</p>
+                        </div>
+                        <p className='text-gray-600 font-bold cursor-pointer hover:text-green-800'>Forget Password</p>
                     </div>
 
                     <button className="btn mt-7 mb-3 bg-[#179800] hover:bg-[#138000] transition font-bold border-none text-white w-full py-3 rounded-lg">
@@ -82,6 +109,7 @@ const Login = () => {
                     </p>
                 </form>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

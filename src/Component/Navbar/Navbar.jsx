@@ -1,5 +1,5 @@
 import React, {} from "react";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import logo from "../../assets/Logo.png";
 
 const Navbar = ({ user }) => {
@@ -54,10 +54,14 @@ const Navbar = ({ user }) => {
                     </div>
 
                     
+                    <Link to={'/'}>
                     <img src={logo} alt="Logo" className="md:w-28 md:h-28 w-20 h-20 relative -left-3 top-1 lg:left-5 md:top-2 z-10" />
+                    </Link>
+                    <Link to={'/'}>
                     <span className="hidden lg:block text-3xl  font-bold text-[#179800]">
                         Leafly
                     </span>
+                    </Link>
 
                 </div>
 

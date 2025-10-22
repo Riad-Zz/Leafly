@@ -99,10 +99,10 @@ const PlantDetails = () => {
             </div>
 
             {/*----------------Go Back Button------------------- */}
-            <div className='flex justify-center'>
+            <div className='flex justify-center mb-7 font-bold'>
                 <button
                     onClick={() => navigate(-1)}
-                    className='bg-[#6B8E75] px-7 py-4 rounded-xl text-white font-semibold mt-10 flex items-center gap-4 cursor-pointer'>
+                    className='bg-[#1E3D32]  px-7 py-4 rounded-xl text-white font-semibold mt-10 flex items-center gap-4 cursor-pointer'>
                     <IoArrowBackSharp /> Go Back
                 </button>
             </div>

@@ -105,9 +105,11 @@ const Navbar = ({ user }) => {
                                 Login
                             </button>
                             </Link>
+                            <Link to={'/register'}>
                             <button className="bg-[#179800] text-white font-bold px-4 md:px-6 py-2 rounded cursor-pointer">
                                 Register
                             </button>
+                            </Link>
                         </>
                     )}
                 </div>

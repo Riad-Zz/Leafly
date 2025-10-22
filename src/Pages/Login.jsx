@@ -16,14 +16,14 @@ const Login = () => {
     }
 
     return (
-        <div className='min-h-screen bg-gray-100 flex flex-col md:flex-row items-center justify-center px-5 py-10 md:py-0'>
+        <div className='min-h-screen bg-gray-100 flex flex-col md:flex-row items-center justify-center px-2 md:px-5 py-10 '>
             
             {/* Image Section */}
             <div className='hidden md:flex md:w-1/2 justify-center items-center'>
                 <img 
                     src={loginModel} 
                     alt="Login Illustration" 
-                    className='max-w-md w-4/5 object-contain'
+                    className='max-w-xl w-full object-contain'
                 />
                 
             </div>

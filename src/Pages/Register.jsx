@@ -24,8 +24,8 @@ const Register = () => {
         googleLogin().then((result)=>{
             const person = result.user ;
             setUser(person) ;
-            toast.success(`Welcome`)
-            console.log(person) ;
+            // toast("Welcome") ;
+            // console.log(person) ;
             naviagate(location.state || '/') ;
 
         })

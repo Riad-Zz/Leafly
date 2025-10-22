@@ -2,13 +2,17 @@ import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import logo from "../../assets/Logo.png";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
+import { toast, ToastContainer } from "react-toastify";
 
 const Navbar = () => {
     
     // user = true 
     // setUser(true) ;
-    const {user,loading} = use(AuthContext) ;
+    const {user,loading ,logOut} = use(AuthContext) ;
+    //  const [isOpen, setIsOpen] = useState(false);
     // console.log(user) 
+    //  const photo = user.photoURL ;
+    //  console.log(photo) ;
 
     const links = (
         <>
@@ -23,6 +27,18 @@ const Navbar = () => {
             </li>
         </>
     );
+
+
+    const handleLogOut = (e) => {
+        e.preventDefault() ; 
+        logOut().then(()=>{
+            toast.success("Logged Out") ;
+        })
+        .catch((error) => {
+            const message = error.message ;
+            toast.warning(message) ;
+});
+    }
 
     return (
         <div className="w-full shadow-sm">
@@ -59,7 +75,7 @@ const Navbar = () => {
 
                     
                     <Link to={'/'}>
-                    <img src={logo} alt="Logo" className="md:w-28 md:h-28 w-20 h-20 relative -left-3 top-1 lg:left-5 md:top-2 z-10" />
+                    <img src={logo} alt="Logo" className=" w-28 h-28 relative -left-4 top-1 lg:left-5 md:top-2 z-10" />
                     </Link>
                     <Link to={'/'}>
                     <span className="hidden lg:block text-3xl  font-bold text-[#179800]">
@@ -78,14 +94,15 @@ const Navbar = () => {
                 <div className="flex items-center gap-3 md:gap-5 ">
                     {user 
                     
-                    ?              //------------If User Present-------------------- 
+                    ?//------------If User Present-------------------- 
                     
                     (
                         <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
                                     {
-                                    loading ? <span className="loading loading-spinner text-success"></span> :<img src={user.photoURL} alt="Avatar" />
+                                    loading ? <span className="loading loading-spinner text-success"></span> :
+                                    <img src={`${user.photoURL}`}></img>
                                     }
                                 </div>
                             </label>
@@ -94,7 +111,7 @@ const Navbar = () => {
                                 className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-32"
                             >
                                 <li>
-                                    <button className="hover:bg-gray-200 w-full  px-2 py-1 font-bold ">
+                                    <button onClick={handleLogOut}  className="hover:bg-gray-200 w-full  px-2 py-1 font-bold ">
                                         Logout
                                     </button>
                                 </li>
@@ -120,6 +137,7 @@ const Navbar = () => {
                     )}
                 </div>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

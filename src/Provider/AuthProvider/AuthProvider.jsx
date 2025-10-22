@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../../FireBase/Firebase.config';
-import {getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import {getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import logo from '../../assets/Logo.png'
 
 
@@ -31,6 +31,11 @@ const AuthProvider = ({children}) => {
         }
     },[])
 
+    //---------------------LogOut----------------------------
+    const logOut = () => {
+        return  signOut(auth) ;
+    }
+
 
     //---------------Shared Data-------------------------------
     const AuthData = {
@@ -38,6 +43,7 @@ const AuthProvider = ({children}) => {
         setUser,
         googleLogin,
         loading,
+        logOut,
     } 
     return (
         <div>

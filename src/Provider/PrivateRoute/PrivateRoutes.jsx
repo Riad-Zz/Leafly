@@ -1,14 +1,15 @@
 import React, { use } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import { Navigate, useLocation } from 'react-router';
-import { GridLoader } from 'react-spinners';
+// import { GridLoader } from 'react-spinners';
+import Loader from '../../Component/Loader/Loader';
 
 const PrivateRoutes = ({children}) => {
     const {user,loading} = use(AuthContext) ;
     const location = useLocation() ;
 
     if(loading){
-        return <GridLoader></GridLoader>
+        return <Loader></Loader>
     }
     if(user && user?.email){
         return children 

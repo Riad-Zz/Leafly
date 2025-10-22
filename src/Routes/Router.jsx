@@ -17,9 +17,9 @@ export const router = createBrowserRouter([
             {index : true ,  Component : Home , loader : ()=>fetch('/topPlants.json')},
             {path:'/plants' , Component : Plants , loader : ()=>fetch('/allPlants.json')},
             {path :'/details/:id' , element : <PrivateRoutes><PlantDetails></PlantDetails> </PrivateRoutes> ,loader:()=>fetch('/allPlants.json')},
-            {path:'/login' , Component:Login},
-            {path : '/register' , Component : Register},
-            {path :'/profile' , Component : Profile},
+            {path:'/login' , Component:Login , loader : ()=>fetch('/topPlants.json')}, //Fake loader
+            {path : '/register' , Component : Register , loader : ()=>fetch('/topPlants.json')}, //Fake Loader
+            {path :'/profile' , element : <PrivateRoutes><Profile></Profile> </PrivateRoutes>,loader : ()=>fetch('/topPlants.json') }, //Fake Loader for Visual Loading Screen
         ]
     }
 ])

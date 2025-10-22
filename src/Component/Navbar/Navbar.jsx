@@ -21,7 +21,7 @@ const Navbar = ({ user }) => {
     );
 
     return (
-        <div className="w-full   shadow-sm">
+        <div className="w-full shadow-sm">
             <div className="lg:max-w-10/12 mx-auto px-1  flex justify-between items-center h-20">
                 
                 <div className="flex items-center relative">
@@ -100,9 +100,11 @@ const Navbar = ({ user }) => {
                     
                     (
                         <>
+                            <Link to={'/login'}>
                             <button className=" outline outline-[#179800]  text-black font-bold px-4 md:px-6 py-2 rounded hover:bg-[#179800] hover:text-white cursor-pointer">
                                 Login
                             </button>
+                            </Link>
                             <button className="bg-[#179800] text-white font-bold px-4 md:px-6 py-2 rounded cursor-pointer">
                                 Register
                             </button>

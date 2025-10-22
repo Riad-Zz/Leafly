@@ -98,7 +98,7 @@ const PlantDetails = () => {
                 
             </div>
 
-            {/*----------------Go Back Button------------------- */}
+            {/*----------------Go Back Button--------------------*/}
             <div className='flex justify-center mb-7 font-bold'>
                 <button
                     onClick={() => navigate(-1)}

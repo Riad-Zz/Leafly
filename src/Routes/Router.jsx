@@ -4,6 +4,7 @@ import Root from '../Root/Root';
 import Home from '../Pages/Home';
 import Plants from '../Pages/Plants';
 import PlantDetails from '../Pages/PlantDetails';
+import Login from '../Pages/Login';
 
 export const router = createBrowserRouter([
     {
@@ -12,7 +13,8 @@ export const router = createBrowserRouter([
         children : [
             {index : true ,  Component : Home , loader : ()=>fetch('/topPlants.json')},
             {path:'/plants' , Component : Plants , loader : ()=>fetch('/allPlants.json')},
-            {path :'/details/:id' , Component : PlantDetails ,loader:()=>fetch('/allPlants.json')}
+            {path :'/details/:id' , Component : PlantDetails ,loader:()=>fetch('/allPlants.json')},
+            {path:'/login' , Component:Login},
         ]
     }
 ])

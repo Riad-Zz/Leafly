@@ -6,6 +6,8 @@ import Plants from '../Pages/Plants';
 import PlantDetails from '../Pages/PlantDetails';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
+import Profile from '../Pages/Profile';
+import PrivateRoutes from '../Provider/PrivateRoute/PrivateRoutes';
 
 export const router = createBrowserRouter([
     {
@@ -14,9 +16,10 @@ export const router = createBrowserRouter([
         children : [
             {index : true ,  Component : Home , loader : ()=>fetch('/topPlants.json')},
             {path:'/plants' , Component : Plants , loader : ()=>fetch('/allPlants.json')},
-            {path :'/details/:id' , Component : PlantDetails ,loader:()=>fetch('/allPlants.json')},
+            {path :'/details/:id' , element : <PrivateRoutes><PlantDetails></PlantDetails> </PrivateRoutes> ,loader:()=>fetch('/allPlants.json')},
             {path:'/login' , Component:Login},
-            {path : '/register' , Component : Register}
+            {path : '/register' , Component : Register},
+            {path :'/profile' , Component : Profile},
         ]
     }
 ])

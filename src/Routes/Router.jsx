@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router';
 import Root from '../Root/Root';
 import Home from '../Pages/Home';
 import Plants from '../Pages/Plants';
+import PlantDetails from '../Pages/PlantDetails';
 
 export const router = createBrowserRouter([
     {
@@ -10,7 +11,8 @@ export const router = createBrowserRouter([
         Component : Root,
         children : [
             {index : true ,  Component : Home , loader : ()=>fetch('/topPlants.json')},
-            {path:'/plants' , Component : Plants , loader : ()=>fetch('/allPlants.json')}
+            {path:'/plants' , Component : Plants , loader : ()=>fetch('/allPlants.json')},
+            {path :'/details/:id' , Component : PlantDetails ,loader:()=>fetch('/allPlants.json')}
         ]
     }
 ])

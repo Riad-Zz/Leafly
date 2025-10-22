@@ -1,5 +1,6 @@
 import React from 'react';
 import star from '../../assets/starIcon.svg'
+import { Link } from 'react-router';
 
 const PlantCard = ({ plant }) => {
     return (
@@ -32,7 +33,9 @@ const PlantCard = ({ plant }) => {
                     </div>
                 </div>
                 <div className='flex justify-center '>
+                <Link to={`/details/${plant.plantId}`}>
                 <button className='btn bg-[#179800] text-white font-bold py-3 px-10 mt-4 rounded-xl cursor-pointer'>View Details</button>
+                </Link>
                 </div>
             </div>
 

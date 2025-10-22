@@ -9,9 +9,9 @@ import { toast, ToastContainer } from 'react-toastify';
 
 const Register = () => {
     const [eye, setEye] = useState(false);
-    const {user,setUser,googleLogin} = use(AuthContext) ;
-    const location = useLocation() ; 
-    const naviagate = useNavigate() ;
+    const { user, setUser, googleLogin, emailRegister, updateUserProfile } = use(AuthContext);
+    const location = useLocation();
+    const naviagate = useNavigate();
 
     // ------------------- Onclick EyeControl ----------------
     const handleEyeClick = (e) => {
@@ -20,30 +20,51 @@ const Register = () => {
     }
     //-----------Google Login Handle---------------------
     const handlegogleLogin = (e) => {
-        e.preventDefault() ;
-        googleLogin().then((result)=>{
-            const person = result.user ;
-            setUser(person) ;
+        e.preventDefault();
+        googleLogin().then((result) => {
+            const person = result.user;
+            setUser(person);
             // toast("Welcome") ;
             // console.log(person) ;
-            naviagate(location.state || '/') ;
+            naviagate(location.state || '/');
 
         })
-        .catch((error) => {
-            const errorMessage = error.message;
-            toast.error(errorMessage) ;
-            console.log(errorMessage) ;
-        })
+            .catch((error) => {
+                const errorMessage = error.message;
+                toast.error(errorMessage);
+                console.log(errorMessage);
+            })
     }
 
-    const handleRegister = (e) =>{
-        e.preventDefault() ;
-        const name = e.target.names.value ; 
-        const photo = e.target.photo.value ; 
-        const email = e.target.email.value ; 
-        const password = e.target.password.value ;
-        console.log(name,photo,email,password) ; 
+    const handleRegister = (e) => {
+        e.preventDefault();
+        const name = e.target.names.value;
+        const photo = e.target.photo.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        console.log(name, photo, email, password);
         // console.log(e.target)
+        emailRegister(email, password).then((result) => {
+            const personn = result.user;
+            
+            naviagate(location.state || '/');
+
+            //------------- Updating User Name and Photo----------------------- 
+
+            updateUserProfile({displayName : name , photoURL : photo}).then(() => {
+                setUser({...personn,displayName : name , photoURL : photo});
+            })
+                .catch((error) => {
+                    
+                    toast.warning(error) ;
+                    setUser(personn) ;
+                });
+        })
+            .catch((error) => {
+                const errorMessage = error.message;
+                toast.error(errorMessage);
+                console.log(errorMessage);
+            })
     }
 
     return (
@@ -129,7 +150,7 @@ const Register = () => {
 
             </div>
 
-                        <ToastContainer></ToastContainer>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };

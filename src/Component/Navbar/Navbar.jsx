@@ -1,10 +1,14 @@
-import React, {} from "react";
+import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import logo from "../../assets/Logo.png";
+import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 
-const Navbar = ({ user }) => {
+const Navbar = () => {
     
-    // user = true
+    // user = true 
+    // setUser(true) ;
+    const {user,loading} = use(AuthContext) ;
+    // console.log(user) 
 
     const links = (
         <>
@@ -80,7 +84,9 @@ const Navbar = ({ user }) => {
                         <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                    <img src={user.avatar} alt="Avatar" />
+                                    {
+                                    loading ? <span className="loading loading-spinner text-success"></span> :<img src={user.photoURL} alt="Avatar" />
+                                    }
                                 </div>
                             </label>
                             <ul

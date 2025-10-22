@@ -9,10 +9,10 @@ import { toast, ToastContainer } from 'react-toastify';
 
 const Login = () => {
 
-    const location = useLocation() ;
-    const navigate = useNavigate() ;
+    const location = useLocation();
+    const navigate = useNavigate();
     const [eye, setEye] = useState(false);
-    const { user, setUser, loginWithEmail} = use(AuthContext);
+    const { user, setUser, loginWithEmail, googleLogin } = use(AuthContext);
     // ------------------- Onclick EyeControl ----------------
     const handleEyeClick = (e) => {
         e.preventDefault();
@@ -28,7 +28,21 @@ const Login = () => {
         loginWithEmail(email, password).then((result) => {
             const person = result.user;
             setUser(person);
-            navigate(location.state || '/') ;
+            navigate(location.state || '/');
+        })
+            .catch((error) => {
+                const errorMessage = error.message;
+                // toast.error(errorMessage) ;
+            });
+    }
+
+    //-------------------Handle google Login---------------------------
+    const handleGoogleLogin = (e) => {
+        e.preventDefault();
+        googleLogin().then((result) => {
+            const personnn = result.user;
+            setUser(personnn)
+            navigate(location.state || '/');
         })
             .catch((error) => {
                 const errorMessage = error.message;
@@ -91,7 +105,7 @@ const Login = () => {
 
                     <p className='text-center font-semibold text-gray-500 mb-4'>OR</p>
 
-                    <button className="btn font-bold bg-gray-100 text-black border border-[#e5e5e5] w-full flex items-center justify-center gap-2 py-3 rounded-lg hover:bg-gray-200 transition">
+                    <button onClick={handleGoogleLogin} className="btn font-bold bg-gray-100 text-black border border-[#e5e5e5] w-full flex items-center justify-center gap-2 py-3 rounded-lg hover:bg-gray-200 transition">
                         <svg aria-label="Google logo" width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"></path>
                             <path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"></path>

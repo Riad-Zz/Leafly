@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../../FireBase/Firebase.config';
-import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateEmail, updateProfile } from "firebase/auth";
+import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateEmail, updateProfile } from "firebase/auth";
 
 
 export const AuthContext = createContext() ;
@@ -37,6 +37,11 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth,email,password) ;
     }
 
+    //---------------Password Reset Email--------------------
+    const forgetPassword = (email) => {
+        return sendPasswordResetEmail(auth,email) ;
+    }
+
     //------------Observer-------------------------------
     useEffect(()=>{
         const tracking = onAuthStateChanged(auth,(currentUser)=>{
@@ -64,7 +69,8 @@ const AuthProvider = ({children}) => {
         emailRegister,
         updateUserProfile ,
         loginWithEmail ,
-        updateUserEmail
+        updateUserEmail,
+        forgetPassword
     } 
     return (
         <div>

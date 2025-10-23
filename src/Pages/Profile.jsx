@@ -15,18 +15,20 @@ const Profile = () => {
 
     const [update, setUpdate] = useState(false);
 
+
+//---------To Handle Email Update---------------
     const handleUpdate = (e) => {
         e.preventDefault();
         setUpdate(!update);
     }
 
-
+//-------------Update User Profile--------------------
     const updateProfile = (e) => {
         e.preventDefault() ;
         const name = e.target.name.value ;
         const photo = e.target.photoURL.value ;
-        updateUserProfile({ displayName: name, photoURL: `${photo ? photo : user.photoURL}` }).then(() => {
-            setUser({ ...user, displayName: name, photoURL: `${photo ? photo : user.photoURL}` }) 
+        updateUserProfile({ displayName: `${name ? name : user.displayName}`, photoURL: `${photo ? photo : user.photoURL}` }).then(() => {
+            setUser({ ...user, displayName: `${name ? name : user.displayName}`, photoURL: `${photo ? photo : user.photoURL}` }) 
             // toast.success("Profile Updated") ;
         })
             .catch((error) => {
@@ -56,17 +58,17 @@ const Profile = () => {
             <div className=" flex justify-center  px-4 py-16  ">
                 <div className="flex flex-col md:flex-row items-center gap-10 bg-white shadow-lg border border-green-100 rounded-3xl w-full max-w-5xl p-10">
 
-                    {/* Left: Large profile image */}
+                    {/*---------- Left Side Image-----------------  */}
                     <div className="relative shrink-0">
                         <div className="absolute inset-0 rounded-full  opacity-40"></div>
                         <img
-                            src={user?.photoURL || "https://i.ibb.co/6b6R5T0/default-avatar.png"}
+                            src={user?.photoURL || "https://i.postimg.cc/YqZ8HkhJ/Download-portrait-man-cartoon-for-free.jpg"}
                             alt="User Avatar"
                             className="relative w-56 h-56 md:w-64 md:h-64 rounded-full object-cover border-4 border-[#e2f7e5] shadow-xl"
                         />
                     </div>
 
-                    
+                    {/*-------------- Right Side Either Profile or Update Profile ---------- */}
                     {
                         update ?
                             <div className="flex-1 text-left space-y-6">
@@ -111,7 +113,7 @@ const Profile = () => {
                                         />
                                     </div>
 
-                                    {/* Photo URL */}
+                                    
                                     <div>
                                         <label className="block text-black font-bold mb-1">
                                             Photo URL
@@ -124,18 +126,18 @@ const Profile = () => {
                                         />
                                     </div>
 
-                                    {/* Buttons */}
+                                   
                                     <div className="flex flex-col md:flex-row gap-3">
                                         <button
-                                            // type="submit"
-                                            className="flex-1 bg-[#179800] text-white font-semibold py-2.5 rounded-lg shadow-sm hover:bg-green-700 transition-all duration-300"
+                                            type="submit"
+                                            className="flex-1 bg-[#179800] text-white font-semibold py-2.5 rounded-lg shadow-sm hover:bg-green-700 transition-all duration-300 cursor-pointer"
                                         >
                                             Save Changes
                                         </button>
 
-                                        <button
+                                        <button onClick={handleUpdate}
                                             type="button"
-                                            className="flex-1 bg-gray-100 text-gray-700 font-medium py-2.5 rounded-lg hover:bg-gray-200 transition-all duration-300"
+                                            className="flex-1 bg-gray-100 text-gray-700 font-medium py-2.5 rounded-lg hover:bg-gray-200 transition-all duration-300 cursor-pointer"
                                         >
                                             Cancel
                                         </button>

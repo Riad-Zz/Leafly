@@ -9,6 +9,7 @@ import photo2 from "../../assets/Banner2.png";
 import photo3 from "../../assets/banner3.png";
 import product1 from '../../assets/product1.png'
 import product2 from '../../assets/product2.png'
+import { Link } from "react-router";
 
 const Banner = () => {
 
@@ -80,12 +81,12 @@ const Banner = () => {
                                             {slide.description}
                                         </p>
                                         <div className="flex gap-3 pt-4">
+                                            <Link to={'/plants'}>
                                             <button className="bg-[#179800] text-white font-bold px-6 py-3 rounded-full text-sm hover:bg-transparent hover:text-[#179800] hover:outline hover:outline-[#179800] transition cursor-pointer">
-                                                SEE MORE
+                                                EXPLORE MORE
                                             </button>
-                                            <button className="font-bold border border-[#179800] px-6 py-3 rounded-full text-sm hover:bg-[#179800] hover:text-white transition">
-                                                SUBSCRIBE
-                                            </button>
+                                            </Link>
+                                            
                                         </div>
                                     </div>
 

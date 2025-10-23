@@ -14,6 +14,7 @@ const Login = () => {
     const [eye, setEye] = useState(false);
     const { user, setUser, loginWithEmail, googleLogin,forgetPassword } = use(AuthContext);
     const [forget, setforget] = useState(false);
+    const [currentEmail,setCurrentEmail] = useState("") ;
     // ------------------- Onclick EyeControl ----------------
     const handleEyeClick = (e) => {
         e.preventDefault();
@@ -36,6 +37,7 @@ const Login = () => {
         loginWithEmail(email, password).then((result) => {
             const person = result.user;
             setUser(person);
+            toast.success(`Welcome ${person.displayName}`,{theme:'colored'})
             navigate(location.state || '/');
         })
             .catch((error) => {
@@ -50,11 +52,13 @@ const Login = () => {
         googleLogin().then((result) => {
             const personnn = result.user;
             setUser(personnn)
+            toast.success(`Welcome ${personnn.displayName}`,{theme:'colored'})
             navigate(location.state || '/');
         })
             .catch((error) => {
                 const errorMessage = error.message;
                 toast.error(errorMessage) ;
+                <ToastContainer></ToastContainer>
             });
     }
 
@@ -65,9 +69,11 @@ const Login = () => {
         // console.log(email) ;
         forgetPassword(email).then(()=>{
             toast.success("Check your email for password reset link") ;
+            <ToastContainer></ToastContainer>
         })
         .catch((error)=>{
             toast.error(error.message) ;
+            
         })
 
     }
@@ -114,6 +120,7 @@ const Login = () => {
                                 required
                                 placeholder="Enter your email"
                                 className="w-full bg-[#F3F3F3] py-3 px-4 rounded-lg mb-5"
+                                value={currentEmail}
                             />
 
                             <button
@@ -147,6 +154,8 @@ const Login = () => {
                                 className="input mb-3 w-full bg-[#F3F3F3] py-4 px-4 rounded-lg"
                                 placeholder="Email"
                                 name='email'
+                                onChange={(e)=>setCurrentEmail(e.target.value)} 
+                                value={currentEmail}
                             />
 
                             <label className="label font-bold text-[#403F3F] text-[16px] mb-2 mt-4">Password</label>
@@ -195,7 +204,7 @@ const Login = () => {
                     </div>
             }
 
-            <ToastContainer></ToastContainer>
+            
         </div>
     );
 };

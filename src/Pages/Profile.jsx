@@ -3,32 +3,42 @@ import { AuthContext } from '../Provider/AuthProvider/AuthProvider';
 import { toast, ToastContainer } from 'react-toastify';
 
 const Profile = () => {
-    const { user, updateUserEmail, setUser, updateUserProfile } = use(AuthContext)
+    const { user, updateUserEmail, setUser, updateUserProfile, favorite, count, setCount } = use(AuthContext)
+
+    const creationTime = user.metadata.creationTime;
+    const dateObj = new Date(creationTime);
+    const formattedDate = `${dateObj.getDate()}/${dateObj.getMonth() + 1}/${dateObj.getFullYear()}`;
+
 
     const plantData = {
-        favoritePlant: "Monstera Deliciosa",
-        plantLoverLevel: "Expert Gardener 🌿",
-        memberSince: "March 2023",
-        savedPlants: 24,
-        greenScore: 89,
+        
+        greenScore: Math.min(count * 5, 100),
+        
+        plantLoverLevel: (() => {
+            const score = Math.min(count * 5, 100);
+            if (score < 20) return "Beginner 🌱";
+            if (score < 50) return "Intermediate Gardener 🌿";
+            if (score < 80) return "Advanced Gardener 🌳";
+            return "Expert Gardener 🌴";
+        })(),
     };
 
     const [update, setUpdate] = useState(false);
 
 
-//---------To Handle Email Update---------------
+    //---------To Handle Email Update---------------
     const handleUpdate = (e) => {
         e.preventDefault();
         setUpdate(!update);
     }
 
-//-------------Update User Profile--------------------
+    //-------------Update User Profile--------------------
     const updateProfile = (e) => {
-        e.preventDefault() ;
-        const name = e.target.name.value ;
-        const photo = e.target.photoURL.value ;
+        e.preventDefault();
+        const name = e.target.name.value;
+        const photo = e.target.photoURL.value;
         updateUserProfile({ displayName: `${name ? name : user.displayName}`, photoURL: `${photo ? photo : user.photoURL}` }).then(() => {
-            setUser({ ...user, displayName: `${name ? name : user.displayName}`, photoURL: `${photo ? photo : user.photoURL}` }) 
+            setUser({ ...user, displayName: `${name ? name : user.displayName}`, photoURL: `${photo ? photo : user.photoURL}` })
             // toast.success("Profile Updated") ;
         })
             .catch((error) => {
@@ -76,14 +86,14 @@ const Profile = () => {
                                     Update Your Profile
                                 </h2>
 
-                                <form onSubmit={async (e)=>{
-                                    e.preventDefault() ;
+                                <form onSubmit={async (e) => {
+                                    e.preventDefault();
 
-                                    await updateProfile(e) ;
-                                    await handleUpdate(e) ;
+                                    await updateProfile(e);
+                                    await handleUpdate(e);
 
                                 }} className="space-y-5 bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-                                    
+
                                     <div>
                                         <label className="text-black block font-bold mb-1">
                                             Name
@@ -97,7 +107,7 @@ const Profile = () => {
                                         />
                                     </div>
 
-                                    
+
                                     <div>
                                         <label className="block text-black font-bold mb-1 ">
                                             Email
@@ -113,7 +123,7 @@ const Profile = () => {
                                         />
                                     </div>
 
-                                    
+
                                     <div>
                                         <label className="block text-black font-bold mb-1">
                                             Photo URL
@@ -126,7 +136,7 @@ const Profile = () => {
                                         />
                                     </div>
 
-                                   
+
                                     <div className="flex flex-col md:flex-row gap-3">
                                         <button
                                             type="submit"
@@ -160,7 +170,7 @@ const Profile = () => {
                                 <div className="space-y-2 text-gray-700">
                                     <p>
                                         <span className="font-semibold text-[#179800]">🌿 Favorite Plant:</span>{" "}
-                                        {plantData.favoritePlant}
+                                        {favorite ? favorite : "No favorite Yet"}
                                     </p>
                                     <p>
                                         <span className="font-semibold text-[#179800]">🌱 Level:</span>{" "}
@@ -168,11 +178,12 @@ const Profile = () => {
                                     </p>
                                     <p>
                                         <span className="font-semibold text-[#179800]">📅 Member Since:</span>{" "}
-                                        {plantData.memberSince}
+                                        {formattedDate}
                                     </p>
                                     <p>
                                         <span className="font-semibold text-[#179800]">🪴 Saved Plants:</span>{" "}
-                                        {plantData.savedPlants}
+                                        {count}
+                                        
                                     </p>
                                     <p>
                                         <span className="font-semibold text-[#179800]">💚 Green Score:</span>{" "}

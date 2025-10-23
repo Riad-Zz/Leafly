@@ -3,12 +3,13 @@ import { Link, NavLink } from "react-router";
 import logo from "../../assets/Logo.png";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 import { toast, ToastContainer } from "react-toastify";
+import { clearUserStats } from "../../utils/localstorage";
 
 const Navbar = () => {
     
     // user = true 
     // setUser(true) ;
-    const {user,loading ,logOut} = use(AuthContext) ;
+    const {user,loading ,logOut,setUser} = use(AuthContext) ;
     //  const [isOpen, setIsOpen] = useState(false);
     // console.log(user) 
     //  const photo = user.photoURL ;
@@ -32,6 +33,9 @@ const Navbar = () => {
     const handleLogOut = (e) => {
         e.preventDefault() ; 
         logOut().then(()=>{
+            clearUserStats() ;
+            setUser(null) ;
+
             toast.success("Logged Out") ;
         })
         .catch((error) => {

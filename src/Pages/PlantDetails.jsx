@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { use } from 'react';
 import { IoArrowBackSharp } from "react-icons/io5";
 import { useLoaderData, useNavigate, useParams } from 'react-router';
 import { toast, ToastContainer } from 'react-toastify';
+import { IoMdStar } from "react-icons/io";
+import { AuthContext } from '../Provider/AuthProvider/AuthProvider';
+import { saveUserStats } from '../utils/localstorage';
 
 const PlantDetails = () => {
+    const { setFavorite } = use(AuthContext);
     const navigate = useNavigate();
     const allPlants = useLoaderData();
     // console.log(allPlants) ;
@@ -13,11 +17,11 @@ const PlantDetails = () => {
     const currentPlant = allPlants.find(p => p.plantId === plantId);
     // console.log(plant) ;
 
-    const handleOnSubmit = (e) =>{
-        e.preventDefault() ;
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
         // console.log("Clickedddd") ;
-        toast.success("Consultation Booked !") ;
-        e.target.reset() ;
+        toast.success("Consultation Booked !");
+        e.target.reset();
     }
 
     return (
@@ -70,12 +74,25 @@ const PlantDetails = () => {
                     <div className='my-6'>
                         <p className='text-[#131313cc] text-base'>{currentPlant.description}</p>
                     </div>
+
+
+
+
                 </div>
+
             </div>
 
-
+            
+            <div className='flex justify-center mt-5'>
+                <button onClick={() => {
+                    setFavorite(currentPlant.plantName) ;
+                    toast.info(`${currentPlant.plantName} is set as your favourite plant now on`) ;
+                    saveUserStats({ favorite: currentPlant.plantName }) ;
+                    
+                }} className='btn bg-[#179800]    text-white font-bold '> <IoMdStar className='text-xl text-orange-300'></IoMdStar> Mark as Favorite</button>
+            </div>
             {/*------------------Consultaion Form-----------------------*/}
-            <div className='md:max-w-10/12 mx-auto mt-10'>
+            <div className='md:max-w-10/12 mx-auto mt-20'>
                 <p className="text-center text-4xl font-bold  font-[Playfair_Display]">
                     Book Consultation
                 </p>
@@ -84,18 +101,18 @@ const PlantDetails = () => {
                     <form onSubmit={handleOnSubmit} className='rounded-xl border-[#13131326] w-xs md:w-lg lg:w-xl border py-10 px-5 md:p-10 '>
 
                         <label className="label font-bold text-xl mb-2 text-black">Name</label>
-                        <input type="text" required className="input w-full mb-4"  placeholder="Enter Your Name" />
+                        <input type="text" required className="input w-full mb-4" placeholder="Enter Your Name" />
 
                         <label className="label font-bold text-xl mb-2 text-black">Email</label>
                         <input type="email" required className="input w-full mb-4" placeholder="Email" />
-                    <div className='flex justify-center'>
-                        <button className="btn btn-neutral my-4 bg-[#179800] text-white text-bold border-none">Book Now</button>
+                        <div className='flex justify-center'>
+                            <button className="btn btn-neutral my-4 bg-[#179800] text-white text-bold border-none">Book Now</button>
 
-                    </div>
-                    
-                </form>
+                        </div>
+
+                    </form>
                 </div>
-                
+
             </div>
 
             {/*----------------Go Back Button--------------------*/}

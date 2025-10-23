@@ -8,11 +8,13 @@ import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import Profile from '../Pages/Profile';
 import PrivateRoutes from '../Provider/PrivateRoute/PrivateRoutes';
+import ErrorPage from '../Component/ErrorPage/ErrorPage';
 
 export const router = createBrowserRouter([
     {
         path : '/', 
         Component : Root,
+        errorElement : <ErrorPage></ErrorPage> ,
         children : [
             {index : true ,  Component : Home , loader : ()=>fetch('/topPlants.json')},
             {path:'/plants' , Component : Plants , loader : ()=>fetch('/allPlants.json')},
@@ -21,6 +23,10 @@ export const router = createBrowserRouter([
             {path : '/register' , Component : Register , loader : ()=>fetch('/topPlants.json')}, //Fake Loader
             {path :'/profile' , element : <PrivateRoutes><Profile></Profile> </PrivateRoutes>,loader : ()=>fetch('/topPlants.json') }, //Fake Loader for Visual Loading Screen
         ]
+    },
+    {
+        path :"*" ,
+        Component : ErrorPage,
     }
 ])
 

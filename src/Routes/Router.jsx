@@ -16,7 +16,7 @@ export const router = createBrowserRouter([
         Component : Root,
         errorElement : <ErrorPage></ErrorPage> ,
         children : [
-            {index : true ,  Component : Home , loader : ()=>fetch('/topPlants.json')},
+            {index : true ,  Component : Home , loader : ()=>fetch('/topPlants.json') ,},
             {path:'/plants' , Component : Plants , loader : ()=>fetch('/allPlants.json')},
             {path :'/details/:id' , element : <PrivateRoutes><PlantDetails></PlantDetails> </PrivateRoutes> ,loader:()=>fetch('/allPlants.json')},
             {path:'/login' , Component:Login , loader : ()=>fetch('/topPlants.json')}, //Fake loader

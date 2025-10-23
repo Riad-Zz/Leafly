@@ -18,7 +18,7 @@ const PlantCard = ({ plant }) => {
                     setCount(count+1) ;
                     toast.success("Plant Saved !") ;
                     saveUserStats({count : count+1}) ;
-                    <ToastContainer></ToastContainer>
+                    
                     
                 }} className="absolute w-8 h-8 right-8 top-8 cursor-pointer">
                     

@@ -6,10 +6,10 @@ import { toast, ToastContainer } from "react-toastify";
 import { clearUserStats } from "../../utils/localstorage";
 
 const Navbar = () => {
-    
+
     // user = true 
     // setUser(true) ;
-    const {user,loading ,logOut,setUser} = use(AuthContext) ;
+    const { user, loading, logOut, setUser } = use(AuthContext);
     //  const [isOpen, setIsOpen] = useState(false);
     // console.log(user) 
     //  const photo = user.photoURL ;
@@ -18,7 +18,7 @@ const Navbar = () => {
     const links = (
         <>
             <li>
-                <NavLink to={'/'}  className="hover:text-[#179800] text-black font-bold">Home</NavLink>
+                <NavLink to={'/'} className="hover:text-[#179800] text-black font-bold">Home</NavLink>
             </li>
             <li>
                 <NavLink to={'/plants'} className="hover:text-[#179800] text-black font-bold">Plants</NavLink>
@@ -31,23 +31,23 @@ const Navbar = () => {
 
 
     const handleLogOut = (e) => {
-        e.preventDefault() ; 
-        logOut().then(()=>{
-            clearUserStats() ;
-            setUser(null) ;
+        e.preventDefault();
+        logOut().then(() => {
+            clearUserStats();
+            setUser(null);
 
-            toast.success("Logged Out") ;
+            toast.success("Logged Out");
         })
-        .catch((error) => {
-            const message = error.message ;
-            toast.warning(message) ;
-});
+            .catch((error) => {
+                const message = error.message;
+                toast.warning(message);
+            });
     }
 
     return (
         <div className="w-full shadow-sm">
             <div className="lg:max-w-10/12 mx-auto px-1  flex justify-between items-center h-20">
-                
+
                 <div className="flex items-center relative">
                     {/*------------- Three bar for small screens----------------------- */}
                     <div className="lg:hidden">
@@ -77,14 +77,14 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    
+
                     <Link to={'/'}>
-                    <img src={logo} alt="Logo" className=" w-28 h-28 relative -left-4 top-1 lg:left-5 md:top-2 z-10" />
+                        <img src={logo} alt="Logo" className=" w-28 h-28 relative -left-4 top-1 lg:left-5 md:top-2 z-10" />
                     </Link>
                     <Link to={'/'}>
-                    <span className="hidden lg:block text-3xl  font-bold text-[#179800]">
-                        Leafly
-                    </span>
+                        <span className="hidden lg:block text-3xl  font-bold text-[#179800]">
+                            Leafly
+                        </span>
                     </Link>
 
                 </div>
@@ -96,49 +96,55 @@ const Navbar = () => {
 
                 {/*-----------------Conditional Redering for User  logo or  Register & Login---------------*/}
                 <div className="flex items-center gap-3 md:gap-5 ">
-                    {user 
-                    
-                    ?//------------If User Present-------------------- 
-                    
-                    (
-                        <div className="dropdown dropdown-end">
-                            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    {
-                                    loading ? <span className="loading loading-spinner text-success"></span> :
-                                    <img src={`${user.photoURL}`}></img>
-                                    }
-                                </div>
-                            </label>
-                            <ul
-                                tabIndex={0}
-                                className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-32"
-                            >
-                                <li>
-                                    <button onClick={handleLogOut}  className="hover:bg-gray-200 w-full  px-2 py-1 font-bold ">
-                                        Logout
+                    {user
+
+                        ?//------------If User Present-------------------- 
+
+                        (
+                            <div className="dropdown dropdown-end">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        {
+                                            loading ? <span className="loading loading-spinner text-success"></span> :
+                                                <img src={`${user.photoURL}`}></img>
+                                        }
+                                    </div>
+                                </label>
+                                <ul
+                                    tabIndex={0}
+                                    className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-32"
+                                >
+                                    <Link to={'/profile'}>
+                                    <li className="font-bold text-center cursor-pointer">{user.displayName}</li>
+                                    </Link>
+                                    <li className="text-center">
+                                        <button
+                                            onClick={handleLogOut}
+                                            className="hover:bg-gray-200 w-full px-2 py-1 font-bold flex justify-center items-center text-center"
+                                        >
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        )
+
+                        :             //-----------------If Not Prsent Login/Register----------------------------
+
+                        (
+                            <>
+                                <Link to={'/login'}>
+                                    <button className=" outline outline-[#179800]  text-black font-bold px-4 md:px-6 py-2 rounded hover:bg-[#179800] hover:text-white cursor-pointer">
+                                        Login
                                     </button>
-                                </li>
-                            </ul>
-                        </div>
-                    ) 
-                    
-                    :             //-----------------If Not Prsent Login/Register----------------------------
-                    
-                    (
-                        <>
-                            <Link to={'/login'}>
-                            <button className=" outline outline-[#179800]  text-black font-bold px-4 md:px-6 py-2 rounded hover:bg-[#179800] hover:text-white cursor-pointer">
-                                Login
-                            </button>
-                            </Link>
-                            <Link to={'/register'}>
-                            <button className="bg-[#179800] text-white font-bold px-4 md:px-6 py-2 rounded cursor-pointer">
-                                Register
-                            </button>
-                            </Link>
-                        </>
-                    )}
+                                </Link>
+                                <Link to={'/register'}>
+                                    <button className="bg-[#179800] text-white font-bold px-4 md:px-6 py-2 rounded cursor-pointer">
+                                        Register
+                                    </button>
+                                </Link>
+                            </>
+                        )}
                 </div>
             </div>
             <ToastContainer></ToastContainer>

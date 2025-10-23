@@ -24,6 +24,14 @@ const PlantDetails = () => {
         e.target.reset();
     }
 
+    const handleFavorite = () => {
+        setFavorite(currentPlant.plantName) ;
+                    toast.info(`${currentPlant.plantName} is set as your favourite plant now on`)
+                     ;
+                    saveUserStats({ favorite: currentPlant.plantName }) ;
+                // <ToastContainer></ToastContainer>
+    }
+
     return (
         <div className=''>
             <div className='flex flex-col lg:flex-row justify-between gap-12 items-center max-w-10/12 mx-auto mt-20'>
@@ -84,12 +92,7 @@ const PlantDetails = () => {
 
             
             <div className='flex justify-center mt-5'>
-                <button onClick={() => {
-                    setFavorite(currentPlant.plantName) ;
-                    toast.info(`${currentPlant.plantName} is set as your favourite plant now on`) ;
-                    saveUserStats({ favorite: currentPlant.plantName }) ;
-                    
-                }} className='btn bg-[#179800]    text-white font-bold '> <IoMdStar className='text-xl text-orange-300'></IoMdStar> Mark as Favorite</button>
+                <button onClick={handleFavorite} className='btn bg-[#179800]    text-white font-bold '> <IoMdStar className='text-xl text-orange-300'></IoMdStar> Mark as Favorite</button>
             </div>
             {/*------------------Consultaion Form-----------------------*/}
             <div className='md:max-w-10/12 mx-auto mt-20'>
@@ -123,8 +126,7 @@ const PlantDetails = () => {
                     <IoArrowBackSharp /> Go Back
                 </button>
             </div>
-
-            <ToastContainer></ToastContainer>
+{/* <ToastContainer></ToastContainer> */}
         </div>
     );
 };

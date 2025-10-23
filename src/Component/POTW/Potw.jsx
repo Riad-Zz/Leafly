@@ -9,11 +9,12 @@ const Potw = () => {
                 Plant of the Week
             </h2>
             <p className='text-center mt-3 text-[18px] text-[#131313cc] font-medium'>Every week, we celebrate a special plant that brings life, color, and calm to your space. This week’s star: the graceful Peace Lily.</p>
-            <section className=" px-6 md:px-16 flex flex-col md:flex-row items-center justify-center gap-10">
+
+            <section className=" px-6 lg:mt-3 xl:mt-0 lg:px-16 flex flex-col lg:flex-row items-center justify-center gap-10">
 
 
                 {/* Left: Image */}
-                <div className="md:w-1/2 w-full flex justify-center">
+                <div className="lg:w-1/2 w-full flex justify-center">
                     <img
                         src={plantImg}
                         alt="Plant of the Week"
@@ -22,7 +23,7 @@ const Potw = () => {
                 </div>
 
                 {/* Right: Text */}
-                <div className="md:w-1/2 w-full">
+                <div className="lg:w-1/2 w-full">
                     <h3 className="text-3xl  font-bold mb-4 text-[#179800]">
                         The Peace Lily (Spathiphyllum)
                     </h3>
@@ -35,11 +36,7 @@ const Potw = () => {
                         Peace Lilies thrive in low to moderate light, preferring indirect sunlight that mimics
                         their natural tropical environment. They enjoy slightly moist soil but dislike
                         overwatering — allowing the top inch of soil to dry out before watering again keeps
-                        them happy and healthy. During warmer months, misting the leaves helps maintain humidity
-                        and encourages vibrant growth. <br /><br />
-                        With minimal care, the Peace Lily rewards you with graceful white flowers that symbolize
-                        purity, tranquility, and harmony — a living reminder of peace within your home or
-                        workspace.
+                        
                     </p>
                     <p className="text-gray-700 italic mb-5">
                         “A symbol of peace, purity, and new beginnings.”
